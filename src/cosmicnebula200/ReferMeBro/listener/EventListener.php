@@ -25,13 +25,15 @@ class EventListener implements Listener
             Utils::sendReferForm($player);
         }
         ReferMeBro::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function () use ($player): void {
-            $p = ReferMeBro::getInstance()->getPlayerManager()->getPlayer($player);
+            $p = ReferMeBro::getInstance()->getPlayerManager()->getPlayer($player->getName());
+            if($p !== null) {
             if (count($p->getCmds()) !== 0) {
                 foreach ($p->getCmds() as $cmd) {
                     $server = ReferMeBro::getInstance()->getServer();
                     $server->dispatchCommand(new ConsoleCommandSender($server, $server->getLanguage()), str_replace("{PLAYER}", $p->getUsername(), $cmd));
-                }
+                  }
                 $p->setCmds([]);
+              }
             }
         }), 20);
     }
