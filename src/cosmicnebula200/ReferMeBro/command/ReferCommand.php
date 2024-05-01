@@ -35,9 +35,14 @@ class ReferCommand extends BaseCommand
                     $form = new CustomForm(function (Player $player, ?array $array){
 
                     });
+                    $name = ReferMeBro::getInstance()->getPlayerManager()->getPlayer($player->getName());
+                    if($name !== null) {
                     $form->setTitle(TextFormat::colorize(ReferMeBro::$forms->getNested("view-form.title")));
-                    $form->addLabel(TextFormat::colorize(str_replace("{CODE}", ReferMeBro::getInstance()->getPlayerManager()->getPlayer($player)->getReferral(), ReferMeBro::$forms->getNested("view-form.content"))));
+                    $form->addLabel(TextFormat::colorize(str_replace("{CODE}", $name->getReferral(), ReferMeBro::$forms->getNested("view-form.content"))));
                     $form->sendToPlayer($player);
+                  }else{
+                   $player->sendMessage("§cUnknow Error!!");
+                }
             }
         });
         $form->setTitle(TextFormat::colorize(ReferMeBro::$forms->getNested('refer-command.title' , '&l&dReferMeBro')));
