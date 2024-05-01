@@ -16,7 +16,7 @@ class ReferCommand extends BaseCommand
 
     protected function prepare(): void
     {
-
+     $this->setPermission("refermebro.command.refer");
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
