@@ -69,9 +69,8 @@ class PlayerManager
         $this->players[$player->getName()] = new Player($player->getUniqueId()->toString(), $player->getName(), $referral, [], false, 0);
     }
 
-    public function getPlayer(P $player): Player
-    {
-        return $this->players[$player->getName()];
+    public function getPlayer(P $player): ?Player {
+        return $this->players[$player->getName()] ?? null;
     }
 
     public function getPlayerByPrefix(string $name): ?Player
