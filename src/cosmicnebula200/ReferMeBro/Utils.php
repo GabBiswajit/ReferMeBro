@@ -33,6 +33,7 @@ class Utils
                 }
 
                 $pl = ReferMeBro::getInstance()->getPlayerManager()->getPlayer($player);
+                if ($pl !== null) {
                 if ($p->getReferral() === $pl->getReferral() or $p->hasReferred())
                     return;
                 $newRefers = $p->getRefers() + 1;
@@ -64,6 +65,7 @@ class Utils
                 {
                     $server = ReferMeBro::getInstance()->getServer();
                     $server->dispatchCommand(new ConsoleCommandSender($server, $server->getLanguage()), str_replace("{PLAYER}", $pl->getUsername(), $cmd));
+                  }
                 }
             }), 20);
         });
